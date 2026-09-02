@@ -58,23 +58,6 @@ const AccountSettingsPage = () => {
         <form onSubmit={handleUpdateProfile} className="space-y-6">
           {/* Avatar Preview & URL */}
           <div className="flex flex-col sm:flex-row items-center gap-6">
-            <img
-              src={avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80'}
-              alt={name}
-              className="w-20 h-20 rounded-full object-cover border-4 border-slate-100 shadow-xs"
-            />
-            <div className="flex-1 w-full">
-              <label className="block text-xs font-bold uppercase text-slate-700 mb-1">
-                Avatar Image URL
-              </label>
-              <input
-                type="url"
-                placeholder="https://images.unsplash.com/..."
-                value={avatar}
-                onChange={(e) => setAvatar(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs focus:ring-1 focus:ring-slate-900"
-              />
-            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
