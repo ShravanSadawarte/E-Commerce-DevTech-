@@ -3,14 +3,20 @@ const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
 const dialect = process.env.DB_DIALECT || 'sqlite';
+const isVercel = process.env.VERCEL === '1';
 
 let sequelize;
 
 if (dialect === 'sqlite') {
-  const defaultStorage = process.env.NODE_ENV === 'test'
-    ? path.resolve(__dirname, '../../database.test.sqlite')
-    : path.resolve(__dirname, '../../database.sqlite');
-  const storagePath = process.env.DB_STORAGE || defaultStorage;
+  let storagePath;
+  if (isVercel) {
+    // Vercel serverless: /tmp is the only writable directory
+    storagePath = '/tmp/database.sqlite';
+  } else if (process.env.NODE_ENV === 'test') {
+    storagePath = path.resolve(__dirname, '../../database.test.sqlite');
+  } else {
+    storagePath = process.env.DB_STORAGE || path.resolve(__dirname, '../../database.sqlite');
+  }
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: storagePath,
@@ -54,7 +60,7 @@ const testConnection = async () => {
       console.warn(`[DB] Falling back to SQLite for zero-downtime execution...`);
       sequelize = new Sequelize({
         dialect: 'sqlite',
-        storage: path.resolve(__dirname, '../../database.sqlite'),
+        storage: isVercel ? '/tmp/database.sqlite' : path.resolve(__dirname, '../../database.sqlite'),
         logging: false,
       });
       await sequelize.authenticate();
