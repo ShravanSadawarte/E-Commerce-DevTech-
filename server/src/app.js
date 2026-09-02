@@ -27,11 +27,15 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
-      callback(null, true);
-    } else {
-      callback(new Error('Blocked by CORS policy'));
-    }
+    // Allow requests with no origin (server-to-server, curl, etc.)
+    if (!origin) return callback(null, true);
+    // Allow in non-production
+    if (process.env.NODE_ENV !== 'production') return callback(null, true);
+    // Allow whitelisted origins
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Allow any *.vercel.app subdomain
+    if (/\.vercel\.app$/.test(origin)) return callback(null, true);
+    callback(new Error('Blocked by CORS policy'));
   },
   credentials: true,
 }));
