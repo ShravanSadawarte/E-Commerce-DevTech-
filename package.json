@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.5.2"
   }
 }

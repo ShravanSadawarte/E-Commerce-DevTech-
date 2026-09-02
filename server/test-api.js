@@ -1,3 +1,8 @@
+const path = require('path');
+process.env.NODE_ENV = 'test';
+process.env.DB_DIALECT = 'sqlite';
+process.env.DB_STORAGE = path.resolve(__dirname, 'database.test.sqlite');
+
 const http = require('http');
 const { app } = require('./src/app');
 const { sequelize } = require('./src/config/database');

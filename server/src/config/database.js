@@ -7,7 +7,10 @@ const dialect = process.env.DB_DIALECT || 'sqlite';
 let sequelize;
 
 if (dialect === 'sqlite') {
-  const storagePath = process.env.DB_STORAGE || path.resolve(__dirname, '../../database.sqlite');
+  const defaultStorage = process.env.NODE_ENV === 'test'
+    ? path.resolve(__dirname, '../../database.test.sqlite')
+    : path.resolve(__dirname, '../../database.sqlite');
+  const storagePath = process.env.DB_STORAGE || defaultStorage;
   sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: storagePath,
