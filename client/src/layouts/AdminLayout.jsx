@@ -64,8 +64,8 @@ const AdminLayout = () => {
         {/* Brand */}
         <div className="h-16 px-6 flex items-center justify-between border-b border-slate-800">
           <Link to="/admin/dashboard" className="flex items-center gap-2">
-            <Shield className="w-6 h-6 text-blue-500" />
-            <span className="text-lg font-black tracking-wider uppercase">DevTech Admin</span>
+            <Shield className="w-6 h-6 text-[var(--color-primary)]" />
+            <span className="text-lg font-black tracking-wider uppercase">NEXORA Admin</span>
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -90,7 +90,7 @@ const AdminLayout = () => {
                 onClick={() => setSidebarOpen(false)}
                 className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition ${
                   isActive
-                    ? 'bg-blue-600 text-white shadow-md'
+                    ? 'bg-[var(--color-primary)] text-white shadow-md'
                     : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                 }`}
               >
@@ -123,7 +123,7 @@ const AdminLayout = () => {
               />
               <div className="min-w-0">
                 <p className="text-xs font-bold text-white truncate max-w-[100px]">{user?.name}</p>
-                <span className="text-[10px] text-blue-400 font-semibold">{user?.role}</span>
+                <span className="text-[10px] text-[var(--color-primary)] font-semibold">{user?.role}</span>
               </div>
             </div>
             <button

@@ -88,7 +88,7 @@ const AdminChatPage = () => {
         conversationId: activeConversationId,
         senderId: user.id,
         senderType: 'ADMIN',
-        senderName: user.name || 'DevTech Support',
+        senderName: user.name || 'NEXORA Support',
         message: text,
       });
 

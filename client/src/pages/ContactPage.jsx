@@ -74,7 +74,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <span className="text-[11px] text-slate-400 block">Phone Support</span>
-                  <p className="text-xs font-bold">+1 (800) 555-DEVTECH</p>
+                  <p className="text-xs font-bold">+1 (800) 555-NEXORA</p>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ const ContactPage = () => {
                 </div>
                 <div>
                   <span className="text-[11px] text-slate-400 block">Email Inquiries</span>
-                  <p className="text-xs font-bold">concierge@devtech.com</p>
+                  <p className="text-xs font-bold">concierge@nexora.com</p>
                 </div>
               </div>
 

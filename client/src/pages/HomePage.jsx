@@ -75,38 +75,38 @@ const HomePage = () => {
             key={slide.bgImage}
             src={slide.bgImage}
             alt={slide.title}
-            className="w-full h-full object-cover object-center opacity-40 scale-105 animate-in fade-in zoom-in-95 duration-1000"
+            className="h-full w-full scale-105 object-cover object-center opacity-40 duration-1000 animate-in fade-in zoom-in-95"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/30" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="section-shell relative z-10 py-20">
           <div className="max-w-xl space-y-6">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-white border border-white/20 text-[11px] font-bold tracking-widest uppercase backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-white/90 backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-[var(--color-primary)]" />
               {slide.tag}
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
+            <h1 className="text-4xl font-black leading-[1.05] tracking-[-0.06em] text-white sm:text-5xl lg:text-6xl">
               {slide.title}
             </h1>
 
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-lg">
+            <p className="max-w-lg text-sm leading-relaxed text-slate-200 sm:text-base">
               {slide.subtitle}
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 to={slide.link}
-                className="bg-white hover:bg-slate-100 text-slate-950 px-8 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider transition shadow-xl hover:scale-105 flex items-center gap-2"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--color-primary)] px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white shadow-lg transition-colors hover:bg-[var(--color-primary-hover)]"
               >
                 <span>{slide.ctaText}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 to="/booking"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/30 backdrop-blur-md px-6 py-3.5 rounded-full font-semibold text-xs uppercase tracking-wider transition"
+                className="rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-colors hover:bg-white/10"
               >
                 Book Stylist
               </Link>
@@ -147,19 +147,19 @@ const HomePage = () => {
 
       {/* 2. TOP CATEGORIES SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8">
+        <div className="mb-8 flex items-end justify-between">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Curated Catalog</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-blue-600">Curated Catalog</span>
+            <h2 className="mt-2 text-2xl font-black tracking-[-0.05em] text-slate-900 sm:text-3xl">
               Top Categories
             </h2>
           </div>
           <Link
             to="/category/men"
-            className="text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-blue-600 flex items-center gap-1 transition"
+            className="flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.16em] text-slate-900 hover:text-blue-600"
           >
             <span>Explore All</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
@@ -168,7 +168,7 @@ const HomePage = () => {
             <Link
               key={cat.id}
               to={`/category/${cat.slug}`}
-              className="group relative rounded-3xl overflow-hidden aspect-4/5 bg-slate-100 card-shadow card-shadow-hover block border border-slate-200"
+              className="group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 card-shadow card-shadow-hover"
             >
               <img
                 src={cat.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80'}
@@ -177,8 +177,8 @@ const HomePage = () => {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-              <div className="absolute bottom-3.5 inset-x-3.5 text-center">
-                <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+              <div className="absolute inset-x-3.5 bottom-3.5 text-center">
+                <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-white sm:text-sm">
                   {cat.name}
                 </h3>
               </div>
@@ -201,7 +201,7 @@ const HomePage = () => {
           </div>
           <Link
             to="/category/deals"
-            className="text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-blue-600 flex items-center gap-1 transition"
+            className="text-xs font-bold uppercase tracking-wider text-slate-900 hover:text-[var(--color-primary)] flex items-center gap-1 transition"
           >
             <span>View All Products</span>
             <ArrowRight className="w-4 h-4" />
@@ -251,7 +251,7 @@ const HomePage = () => {
       {/* 5. TESTIMONIALS SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Client Endorsements</span>
+          <span className="text-[11px] font-bold tracking-widest uppercase text-[var(--color-primary)]">Client Endorsements</span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
             What Our Customers Say
           </h2>

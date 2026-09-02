@@ -112,7 +112,7 @@ const FloatingChatWidget = () => {
                 <Shield className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-sm font-bold leading-tight">DevTech Support</h4>
+                <h4 className="text-sm font-bold leading-tight">NEXORA Support</h4>
                 <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span>Online • Immediate response</span>
@@ -161,7 +161,7 @@ const FloatingChatWidget = () => {
                       className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                     >
                       <span className="text-[10px] text-slate-400 mb-0.5 px-1 font-medium">
-                        {isUser ? 'You' : msg.senderName || 'DevTech Agent'}
+                        {isUser ? 'You' : msg.senderName || 'NEXORA Agent'}
                       </span>
                       <div
                         className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-xs ${

@@ -45,9 +45,9 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between card-shadow card-shadow-hover transition duration-300">
+    <div className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-slate-200 bg-white card-shadow card-shadow-hover">
       {/* Product Image Area */}
-      <Link to={`/product/${product.slug || product.id}`} className="relative aspect-square overflow-hidden bg-slate-50 block">
+      <Link to={`/product/${product.slug || product.id}`} className="relative block aspect-square overflow-hidden bg-slate-50">
         <img
           src={primaryImage}
           alt={product.name}
@@ -56,14 +56,14 @@ const ProductCard = ({ product }) => {
         />
 
         {/* Discount / New Badge */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1">
+        <div className="absolute left-2.5 top-2.5 flex flex-col gap-1">
           {hasDiscount && (
-            <span className="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wide">
+            <span className="rounded-md bg-red-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.12em] text-white">
               {discountPercent}% OFF
             </span>
           )}
           {product.isFeatured && (
-            <span className="bg-slate-900 text-white text-[10px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wide">
+            <span className="rounded-md bg-[var(--color-primary)] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
               Featured
             </span>
           )}
@@ -72,10 +72,10 @@ const ProductCard = ({ product }) => {
         {/* Wishlist Button */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute top-2.5 right-2.5 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition ${
+          className={`absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-md transition ${
             isWishlisted
-              ? 'bg-red-50 text-red-600 border border-red-200 shadow-xs'
-              : 'bg-white/80 text-slate-700 hover:bg-white border border-slate-200'
+              ? 'border border-red-200 bg-red-50 text-red-600'
+              : 'border border-slate-200 bg-white/80 text-slate-700 hover:bg-white'
           }`}
           aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
@@ -139,10 +139,10 @@ const ProductCard = ({ product }) => {
           <button
             onClick={handleQuickAdd}
             disabled={product.stock === 0}
-            className={`flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition ${
+            className={`flex items-center justify-center gap-1.5 rounded-xl px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.16em] transition ${
               product.stock === 0
-                ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                : 'bg-slate-900 hover:bg-slate-800 text-white shadow-xs'
+                ? 'cursor-not-allowed bg-slate-100 text-slate-400'
+                : 'bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]'
             }`}
           >
             <ShoppingBag className="w-3.5 h-3.5" />

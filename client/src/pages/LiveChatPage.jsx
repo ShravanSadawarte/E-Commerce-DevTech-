@@ -116,7 +116,7 @@ const LiveChatPage = () => {
               <h2 className="text-sm font-bold">Chat with us</h2>
               <div className="flex items-center gap-1.5 text-xs text-emerald-400">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>DevTech Support Team Online</span>
+                <span>NEXORA Support Team Online</span>
               </div>
             </div>
           </div>
@@ -138,7 +138,7 @@ const LiveChatPage = () => {
                     className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                   >
                     <span className="text-[10px] text-slate-400 mb-1 px-1 font-semibold">
-                      {isUser ? 'You' : msg.senderName || 'DevTech Agent'}
+                      {isUser ? 'You' : msg.senderName || 'NEXORA Agent'}
                     </span>
                     <div
                       className={`max-w-[75%] rounded-3xl px-4 py-3 text-xs leading-relaxed shadow-xs ${

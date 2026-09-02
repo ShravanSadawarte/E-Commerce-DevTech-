@@ -46,9 +46,9 @@ const CartPage = () => {
     if (promoCode.trim().toUpperCase() === 'WELCOME10') {
       setAppliedDiscount(totals.subtotal * 0.1);
       setPromoMessage('Promo code WELCOME10 applied! (10% OFF)');
-    } else if (promoCode.trim().toUpperCase() === 'DEVTECH25') {
+    } else if (promoCode.trim().toUpperCase() === 'NEXORA25') {
       setAppliedDiscount(25.00);
-      setPromoMessage('Promo code DEVTECH25 applied! ($25.00 OFF)');
+      setPromoMessage('Promo code NEXORA25 applied! ($25.00 OFF)');
     } else {
       setAppliedDiscount(0);
       setPromoMessage('Invalid promotional code.');

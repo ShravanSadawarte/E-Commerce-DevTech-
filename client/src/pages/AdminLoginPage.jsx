@@ -30,7 +30,7 @@ const AdminLoginPage = () => {
           </div>
           <div>
             <h1 className="text-xl font-black tracking-widest uppercase text-white">
-              ADMINISTRATIVE PORTAL
+              NEXORA ADMIN PORTAL
             </h1>
             <p className="text-xs text-slate-400 mt-1">
               Secure authorization required for dashboard access

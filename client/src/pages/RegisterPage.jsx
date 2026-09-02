@@ -36,7 +36,7 @@ const RegisterPage = () => {
             CREATE ACCOUNT
           </h1>
           <p className="text-xs text-slate-500">
-            Join DevTech for bespoke shopping & member perks
+            Join NEXORA for curated essentials & member perks
           </p>
         </div>
 

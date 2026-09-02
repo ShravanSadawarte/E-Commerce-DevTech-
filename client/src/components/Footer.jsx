@@ -58,14 +58,14 @@ const Footer = () => {
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="text-2xl font-black tracking-tight text-slate-900 uppercase">
-              Dev<span className="text-blue-600">Tech</span>
+              Nex<span className="text-[var(--color-primary)]">ora</span>
             </Link>
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm">
-              DevTech is an experiential e-commerce destination curated for discerning individuals who appreciate enduring craftsmanship, modern tailoring, and refined aesthetics.
+              NEXORA is a premium one-stop shopping destination for modern essentials, elevated wardrobes, and everyday convenience delivered with style.
             </p>
             <div className="pt-2">
               <span className="text-xs font-semibold text-slate-900 block mb-2">Subscribe to our newsletter</span>
-              <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed to DevTech insider updates!'); }} className="flex max-w-sm">
+              <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed to NEXORA insider updates!'); }} className="flex max-w-sm">
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -92,7 +92,7 @@ const Footer = () => {
               <li><Link to="/category/footwear" className="hover:text-slate-950 transition">Footwear & Sneakers</Link></li>
               <li><Link to="/category/bags" className="hover:text-slate-950 transition">Leather Bags</Link></li>
               <li><Link to="/category/watches" className="hover:text-slate-950 transition">Luxury Watches</Link></li>
-              <li><Link to="/category/deals" className="text-red-600 font-semibold hover:text-red-700 transition">Exclusive Deals</Link></li>
+              <li><Link to="/category/deals" className="text-[var(--color-error)] font-semibold hover:text-red-700 transition">Exclusive Deals</Link></li>
             </ul>
           </div>
 
@@ -115,14 +115,14 @@ const Footer = () => {
               <li><Link to="/login" className="hover:text-slate-950 transition">Customer Sign In</Link></li>
               <li><Link to="/register" className="hover:text-slate-950 transition">Create Account</Link></li>
               <li><Link to="/profile" className="hover:text-slate-950 transition">Account Settings</Link></li>
-              <li><Link to="/admin/login" className="text-indigo-600 font-medium hover:underline">Admin Portal</Link></li>
+              <li><Link to="/admin/login" className="text-[var(--color-primary)] font-medium hover:underline">Admin Portal</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom copyright & credits */}
         <div className="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} DevTech E-Commerce Inc. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} NEXORA Commerce. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span>Privacy Policy</span>
             <span>Terms of Service</span>

@@ -48,7 +48,7 @@ const LoginPage = () => {
               LOGIN / REGISTER
             </h1>
             <p className="text-xs text-slate-500 mt-1">
-              Sign in to your DevTech account
+              Sign in to your NEXORA account
             </p>
           </div>
         </div>

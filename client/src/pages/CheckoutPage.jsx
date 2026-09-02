@@ -134,7 +134,7 @@ const CheckoutPage = () => {
         key: razorpayKeyId,
         amount,
         currency,
-        name: 'DevTech Store',
+        name: 'NEXORA Store',
         description: `Order ${orderNumber}`,
         image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80',
         order_id: razorpayOrderId.startsWith('order_mock_') ? undefined : razorpayOrderId,

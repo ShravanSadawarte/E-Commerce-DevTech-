@@ -1,6 +1,6 @@
-# DevTech | Production Full-Stack E-Commerce Platform
+# NEXORA | Everything you need. One place.
 
-A production-grade, full-stack e-commerce web application featuring modern minimalist aesthetics, responsive storefront architecture, customer booking/appointments, real-time live chat concierge, secure transactional checkout with Razorpay payments, and an administrative control panel.
+A premium full-stack commerce experience designed for modern shoppers, combining a polished storefront, curated product discovery, personalized booking, live support chat, secure checkout, and a high-control admin dashboard.
 
 ---
 
@@ -153,12 +153,12 @@ DB_DIALECT=sqlite
 DB_STORAGE=./database.sqlite
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_NAME=devtech_ecommerce
+DB_NAME=nexora_ecommerce
 DB_USER=root
 DB_PASSWORD=your_password
 
 # Authentication
-JWT_SECRET=super_secret_jwt_key_devtech_ecommerce_2026_production_safe
+JWT_SECRET=super_secret_jwt_key_nexora_ecommerce_2026_production_safe
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:5173
 
@@ -178,7 +178,7 @@ CLOUDINARY_API_SECRET=abcdefghijklmnopqrstuvwxyz12345
 
 ### 1. Create MySQL Database (if using MySQL)
 ```sql
-CREATE DATABASE devtech_ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE nexora_ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
 ### 2. Populate Database Schema & Seed Data

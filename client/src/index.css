@@ -1,42 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* NEXORA Color System - Primary Brand Colors */
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-active: #1E40AF;
+  
+  /* Neutral Colors */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-text: #171717;
+  --color-text-secondary: #6B7280;
+  --color-text-disabled: #9CA3AF;
+  --color-border: #E5E7EB;
+  
+  /* Semantic Colors */
+  --color-success: #16A34A;
+  --color-warning: #D97706;
+  --color-error: #DC2626;
+  
+  /* Shadows */
+  --shadow-soft: 0 10px 30px -20px rgba(15, 23, 42, 0.18);
+  --shadow-card: 0 1px 0 rgba(15, 23, 42, 0.04), 0 10px 20px -18px rgba(15, 23, 42, 0.22);
+}
+
 @layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-[var(--color-bg)] text-[var(--color-text)] antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  img {
+    @apply transition-all duration-300;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(37, 99, 235, 0.14);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-[var(--color-primary)] px-5 py-3 text-sm font-semibold text-white shadow-soft transition-all duration-200 hover:bg-[var(--color-primary-hover)] active:bg-[var(--color-primary-active)] focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-5 py-3 text-sm font-semibold text-[var(--color-text)] shadow-sm transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-xl border border-[var(--color-border)] bg-gray-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)] transition-all duration-200 hover:border-gray-300 hover:bg-[var(--color-surface)];
+  }
+
+  .input-base {
+    @apply w-full rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] px-3.5 py-2.5 text-sm text-[var(--color-text)] placeholder:text-[var(--color-text-disabled)] shadow-sm transition-all duration-200 focus:border-[var(--color-primary)] focus:outline-none focus:ring-4 focus:ring-blue-100;
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-card;
+  }
+
+  .badge-soft {
+    @apply inline-flex items-center rounded-full border border-[var(--color-border)] bg-gray-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--color-text-secondary)];
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #F5F5F5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #D1D5DB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #B3B9C3;
 }
 
-/* Smooth Image Transitions */
-img {
-  @apply transition-all duration-300;
-}
-
-/* Subtle Card Glow */
 .card-shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card);
 }
+
 .card-shadow-hover {
   transition: all 0.25s ease-in-out;
 }
+
 .card-shadow-hover:hover {
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
