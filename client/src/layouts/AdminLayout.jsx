@@ -42,7 +42,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex">
+    <div className="min-h-screen bg-[#F9FAFB] flex">
       {/* Mobile Sidebar Backdrop */}
       {sidebarOpen && (
         <div
@@ -84,10 +84,10 @@ const AdminLayout = () => {
                 key={item.path}
                 to={item.path}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition ${
+                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-[13px] font-medium transition ${
                   isActive
-                    ? 'bg-[var(--color-primary)] text-white shadow-md'
-                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                    ? 'bg-white text-slate-900 shadow-sm'
+                    : 'text-slate-400 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 <div className="flex items-center gap-3">

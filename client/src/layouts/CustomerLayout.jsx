@@ -6,7 +6,7 @@ import FloatingChatWidget from '../components/FloatingChatWidget';
 
 const CustomerLayout = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
       <Navbar />
       <main className="flex-1">
         <Outlet />

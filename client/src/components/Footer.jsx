@@ -1,135 +1,64 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Truck, RotateCcw, ShieldCheck, Headphones, ArrowRight, Heart } from 'lucide-react';
+import { ArrowRight, ShieldCheck } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-slate-200 mt-20">
-      {/* 4 Feature Benefits Strip */}
-      <div className="border-b border-slate-200 bg-slate-50/50 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-xs">
-                <Truck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Free Shipping</h4>
-                <p className="text-xs text-slate-500">On all orders over $100</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-xs">
-                <RotateCcw className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Easy Returns</h4>
-                <p className="text-xs text-slate-500">30-day money-back guarantee</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-xs">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Secure Payment</h4>
-                <p className="text-xs text-slate-500">256-bit SSL encryption</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 shadow-xs">
-                <Headphones className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">24/7 Support</h4>
-                <p className="text-xs text-slate-500">Dedicated live agent assistance</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Brand Info */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link to="/" className="text-2xl font-black tracking-tight text-slate-900 uppercase">
-              Nex<span className="text-[var(--color-primary)]">ora</span>
+    <footer className="mt-16 border-t border-slate-200 bg-white">
+      <div className="section-shell py-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <Link to="/" className="inline-flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-white font-black text-[13px]">N</div>
+              <span className="text-[18px] font-black tracking-tight text-slate-900">NEXORA</span>
             </Link>
-            <p className="text-xs text-slate-600 leading-relaxed max-w-sm">
-              NEXORA is a premium one-stop shopping destination for modern essentials, elevated wardrobes, and everyday convenience delivered with style.
-            </p>
-            <div className="pt-2">
-              <span className="text-xs font-semibold text-slate-900 block mb-2">Subscribe to our newsletter</span>
-              <form onSubmit={(e) => { e.preventDefault(); alert('Subscribed to NEXORA insider updates!'); }} className="flex max-w-sm">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  required
-                  className="bg-slate-50 border border-slate-200 text-slate-900 rounded-l-xl px-3.5 py-2 text-xs focus:outline-none focus:ring-1 focus:ring-slate-900 flex-1"
-                />
-                <button
-                  type="submit"
-                  className="bg-slate-900 hover:bg-slate-800 text-white text-xs px-4 py-2 rounded-r-xl font-semibold flex items-center gap-1 transition"
-                >
-                  Join
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </form>
-            </div>
+            <p className="mt-3 max-w-sm text-[13px] leading-6 text-slate-500">Premium essentials, curated for everyday life. Quality materials, timeless design, fair pricing.</p>
+            <form onSubmit={(e)=>{e.preventDefault(); alert('Subscribed — check your inbox');}} className="mt-5 flex max-w-sm gap-2">
+              <input type="email" required placeholder="Email for updates" className="flex-1 rounded-full border border-slate-200 bg-slate-50 px-4 py-2.5 text-[13px] placeholder:text-slate-400 focus:bg-white focus:border-slate-900 focus:outline-none" />
+              <button type="submit" className="rounded-full bg-slate-900 px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-black">Join <ArrowRight className="ml-1 inline h-3.5 w-3.5" /></button>
+            </form>
+            <p className="mt-2 text-[11px] text-slate-400">No spam. Unsubscribe anytime.</p>
           </div>
 
-          {/* Categories */}
           <div>
-            <h5 className="text-xs font-bold uppercase text-slate-900 tracking-wider mb-4">Shop</h5>
-            <ul className="space-y-2.5 text-xs text-slate-600">
-              <li><Link to="/category/men" className="hover:text-slate-950 transition">Men's Apparel</Link></li>
-              <li><Link to="/category/women" className="hover:text-slate-950 transition">Women's Collection</Link></li>
-              <li><Link to="/category/footwear" className="hover:text-slate-950 transition">Footwear & Sneakers</Link></li>
-              <li><Link to="/category/bags" className="hover:text-slate-950 transition">Leather Bags</Link></li>
-              <li><Link to="/category/watches" className="hover:text-slate-950 transition">Luxury Watches</Link></li>
-              <li><Link to="/category/deals" className="text-[var(--color-error)] font-semibold hover:text-red-700 transition">Exclusive Deals</Link></li>
+            <h4 className="text-[12px] font-bold uppercase tracking-widest text-slate-900">Shop</h4>
+            <ul className="mt-4 space-y-2.5 text-[13px]">
+              <li><Link to="/category/men" className="text-slate-600 hover:text-slate-900">Men</Link></li>
+              <li><Link to="/category/women" className="text-slate-600 hover:text-slate-900">Women</Link></li>
+              <li><Link to="/category/footwear" className="text-slate-600 hover:text-slate-900">Footwear</Link></li>
+              <li><Link to="/category/bags" className="text-slate-600 hover:text-slate-900">Bags</Link></li>
+              <li><Link to="/category/watches" className="text-slate-600 hover:text-slate-900">Watches</Link></li>
+              <li><Link to="/category/deals" className="font-semibold text-red-600 hover:text-red-700">Deals</Link></li>
             </ul>
           </div>
 
-          {/* Customer Care */}
           <div>
-            <h5 className="text-xs font-bold uppercase text-slate-900 tracking-wider mb-4">Customer Care</h5>
-            <ul className="space-y-2.5 text-xs text-slate-600">
-              <li><Link to="/orders" className="hover:text-slate-950 transition">Track Your Order</Link></li>
-              <li><Link to="/chat" className="hover:text-slate-950 transition">Live Chat Support</Link></li>
-              <li><Link to="/testimonials" className="hover:text-slate-950 transition">Verified Reviews</Link></li>
+            <h4 className="text-[12px] font-bold uppercase tracking-widest text-slate-900">Help</h4>
+            <ul className="mt-4 space-y-2.5 text-[13px]">
+              <li><Link to="/orders" className="text-slate-600 hover:text-slate-900">Track order</Link></li>
+              <li><Link to="/chat" className="text-slate-600 hover:text-slate-900">Live chat</Link></li>
+              <li><Link to="/testimonials" className="text-slate-600 hover:text-slate-900">Reviews</Link></li>
+              <li><span className="text-slate-400">Shipping & returns</span></li>
             </ul>
           </div>
 
-          {/* Admin & Account */}
           <div>
-            <h5 className="text-xs font-bold uppercase text-slate-900 tracking-wider mb-4">Account & Portal</h5>
-            <ul className="space-y-2.5 text-xs text-slate-600">
-              <li><Link to="/login" className="hover:text-slate-950 transition">Customer Sign In</Link></li>
-              <li><Link to="/register" className="hover:text-slate-950 transition">Create Account</Link></li>
-              <li><Link to="/profile" className="hover:text-slate-950 transition">Account Settings</Link></li>
-              <li><Link to="/admin/login" className="text-[var(--color-primary)] font-medium hover:underline">Admin Portal</Link></li>
+            <h4 className="text-[12px] font-bold uppercase tracking-widest text-slate-900">Account</h4>
+            <ul className="mt-4 space-y-2.5 text-[13px]">
+              <li><Link to="/login" className="text-slate-600 hover:text-slate-900">Sign in</Link></li>
+              <li><Link to="/register" className="text-slate-600 hover:text-slate-900">Create account</Link></li>
+              <li><Link to="/profile" className="text-slate-600 hover:text-slate-900">Profile</Link></li>
+              <li><Link to="/admin/login" className="inline-flex items-center gap-1 font-semibold text-slate-900 hover:text-blue-600"><ShieldCheck className="h-3.5 w-3.5" /> Admin</Link></li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom copyright & credits */}
-        <div className="border-t border-slate-100 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <p>© {new Date().getFullYear()} NEXORA Commerce. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-            <span>Security</span>
-          </div>
+        <div className="mt-10 flex flex-col gap-3 border-t border-slate-100 pt-6 text-[12px] text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Nexora. All rights reserved.</p>
+          <div className="flex gap-4"><span>Privacy</span><span>Terms</span><span>Security</span></div>
         </div>
       </div>
     </footer>
   );
 };
-
 export default Footer;

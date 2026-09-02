@@ -1,157 +1,60 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { User, Lock, Mail, Phone, Loader2 } from 'lucide-react';
+import { User, Lock, Mail, Phone, Loader2, ArrowRight } from 'lucide-react';
 import { registerUser, clearAuthError } from '../store/authSlice';
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate(); const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
+  const [name, setName] = useState(''); const [email, setEmail] = useState(''); const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState(''); const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPass, setShowPass] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
-      return;
-    }
+    if (password !== confirmPassword) { alert('Passwords do not match'); return; }
     dispatch(clearAuthError());
     const res = await dispatch(registerUser({ name, email, phone, password }));
-    if (!res.error) {
-      navigate('/');
-    }
+    if (!res.error) navigate('/');
   };
-
+  const Field = ({ label, icon: Icon, ...props }) => (
+    <div>
+      <label className="text-[11px] font-bold uppercase tracking-widest text-slate-700">{label}</label>
+      <div className="relative mt-1.5">
+        <Icon className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+        <input {...props} className="h-11 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-3 text-[14px] placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-900/10" />
+      </div>
+    </div>
+  );
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 card-shadow space-y-6">
-        <div className="text-center space-y-2">
-          <h1 className="text-xl font-black tracking-wider uppercase text-slate-900">
-            CREATE ACCOUNT
-          </h1>
-          <p className="text-xs text-slate-500">
-            Join NEXORA for curated essentials & member perks
-          </p>
+    <div className="min-h-[78vh] bg-gradient-to-b from-slate-50 to-white flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-[480px] rounded-[24px] border border-slate-200 bg-white p-7 sm:p-8 shadow-card">
+        <div className="text-center">
+          <Link to="/" className="inline-flex items-center gap-2"><div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-white font-black text-[13px]">N</div><span className="text-[16px] font-black tracking-tight">NEXORA</span></Link>
+          <h1 className="mt-4 font-display text-[22px] font-bold tracking-tight text-slate-900">Create account</h1>
+          <p className="mt-1 text-[13px] text-slate-500">Join for curated essentials & member perks</p>
         </div>
-
-        {error && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs font-semibold text-red-700">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <div className="mt-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] font-medium text-red-700">{error}</div>}
+        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <Field label="Full name *" icon={User} type="text" required placeholder="John Doe" value={name} onChange={(e)=>setName(e.target.value)} />
+          <Field label="Email *" icon={Mail} type="email" required placeholder="john@example.com" value={email} onChange={(e)=>setEmail(e.target.value)} />
+          <Field label="Phone" icon={Phone} type="tel" placeholder="+1 555 123 4567" value={phone} onChange={(e)=>setPhone(e.target.value)} />
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Full Name *
-            </label>
-            <div className="relative">
-              <input
-                type="text"
-                required
-                placeholder="John Doe"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl pl-11 pr-4 py-3 text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white"
-              />
-              <User className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+            <label className="text-[11px] font-bold uppercase tracking-widest text-slate-700">Password *</label>
+            <div className="relative mt-1.5">
+              <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <input type={showPass ? 'text' : 'password'} required minLength={6} placeholder="••••••••" value={password} onChange={(e)=>setPassword(e.target.value)} className="h-11 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-16 text-[14px] placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-4 focus:ring-slate-900/10" />
+              <button type="button" onClick={()=>setShowPass(!showPass)} className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold uppercase tracking-widest">{showPass ? 'Hide' : 'Show'}</button>
             </div>
           </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Email Address *
-            </label>
-            <div className="relative">
-              <input
-                type="email"
-                required
-                placeholder="john@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl pl-11 pr-4 py-3 text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white"
-              />
-              <Mail className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Phone Number
-            </label>
-            <div className="relative">
-              <input
-                type="tel"
-                placeholder="+1 555 123 4567"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl pl-11 pr-4 py-3 text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white"
-              />
-              <Phone className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Password (min. 6 characters) *
-            </label>
-            <div className="relative">
-              <input
-                type="password"
-                required
-                minLength={6}
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl pl-11 pr-4 py-3 text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white"
-              />
-              <Lock className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1">
-              Confirm Password *
-            </label>
-            <div className="relative">
-              <input
-                type="password"
-                required
-                placeholder="••••••••"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-2xl pl-11 pr-4 py-3 text-xs focus:ring-2 focus:ring-slate-900 focus:bg-white"
-              />
-              <Lock className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-300 text-white py-3.5 rounded-2xl text-xs font-bold uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition hover:scale-[1.01]"
-          >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <span>SIGN UP</span>}
+          <Field label="Confirm password *" icon={Lock} type={showPass ? 'text' : 'password'} required placeholder="••••••••" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} />
+          <button type="submit" disabled={loading} className="flex h-11 w-full items-center justify-center gap-2 rounded-full bg-slate-900 text-[13px] font-semibold tracking-wide text-white hover:bg-black disabled:opacity-40">
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Create account <ArrowRight className="h-4 w-4" /></>}
           </button>
         </form>
-
-        <div className="text-center pt-2 border-t border-slate-100">
-          <p className="text-xs text-slate-500">
-            Already have an account?{' '}
-            <Link to="/login" className="font-bold text-slate-900 underline hover:text-blue-600">
-              Log In
-            </Link>
-          </p>
-        </div>
+        <p className="mt-6 text-center text-[13px] text-slate-600">Already have an account? <Link to="/login" className="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 hover:decoration-slate-900">Log in</Link></p>
       </div>
     </div>
   );
 };
-
 export default RegisterPage;
