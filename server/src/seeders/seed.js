@@ -16,11 +16,8 @@ const {
   Payment,
   Review,
   Testimonial,
-  Booking,
-  ContactMessage,
   Conversation,
   Message,
-  Coupon,
 } = require('../models');
 const { hashPassword } = require('../utils/hash');
 
@@ -1005,7 +1002,7 @@ const seedDatabase = async () => {
       totalAmount: 209.99,
       status: 'Delivered',
       paymentStatus: 'Paid',
-      paymentMethod: 'RAZORPAY',
+      paymentMethod: 'COD',
       createdAt: new Date(Date.now() - 86400000 * 5),
     });
 
@@ -1023,7 +1020,7 @@ const seedDatabase = async () => {
     await Payment.create({
       orderId: order1.id,
       userId: customer1.id,
-      provider: 'RAZORPAY',
+      provider: 'COD',
       providerPaymentId: 'pay_live_sample_01',
       amount: 209.99,
       currency: 'INR',
@@ -1042,7 +1039,7 @@ const seedDatabase = async () => {
       totalAmount: 136.49,
       status: 'Shipped',
       paymentStatus: 'Paid',
-      paymentMethod: 'RAZORPAY',
+      paymentMethod: 'COD',
       createdAt: new Date(Date.now() - 86400000 * 2),
     });
 
@@ -1060,7 +1057,7 @@ const seedDatabase = async () => {
     await Payment.create({
       orderId: order2.id,
       userId: customer2.id,
-      provider: 'RAZORPAY',
+      provider: 'COD',
       providerPaymentId: 'pay_live_sample_02',
       amount: 136.49,
       currency: 'INR',
@@ -1124,31 +1121,7 @@ const seedDatabase = async () => {
       await Testimonial.create(t);
     }
 
-    // 10. Seed Bookings
-    const today = new Date().toISOString().split('T')[0];
-    await Booking.create({
-      userId: customer1.id,
-      customerName: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555 123 4567',
-      serviceType: 'Personal Stylist Consultation',
-      date: today,
-      timeSlot: '11:00 AM',
-      status: 'Confirmed',
-      notes: 'Looking for tailored summer formal recommendations.',
-    });
-
-    // 11. Seed Contact Messages
-    await ContactMessage.create({
-      userId: customer2.id,
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      subject: 'Inquiry regarding international express shipping',
-      message: 'Hello, do you offer priority express shipping to Canada for the Voyager backpack collection?',
-      status: 'NEW',
-    });
-
-    // 12. Seed Conversation & Messages
+    // 10. Seed Conversation & Messages
     const conv = await Conversation.create({
       userId: customer1.id,
       userName: customer1.name,
@@ -1173,24 +1146,6 @@ const seedDatabase = async () => {
       senderName: 'DevTech Support',
       message: 'Hello John! It is a tailored modern slim-fit cut. If you prefer a looser drape, we recommend ordering one size up.',
       isRead: true,
-    });
-
-    // 13. Seed Promo Coupons
-    await Coupon.create({
-      code: 'WELCOME10',
-      type: 'PERCENT',
-      value: 10.00,
-      minimumOrder: 50.00,
-      maximumDiscount: 25.00,
-      status: true,
-    });
-
-    await Coupon.create({
-      code: 'DEVTECH25',
-      type: 'FIXED',
-      value: 25.00,
-      minimumOrder: 150.00,
-      status: true,
     });
 
     console.log('[Seed] Database seeding completed successfully!');

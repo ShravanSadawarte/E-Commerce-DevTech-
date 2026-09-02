@@ -35,7 +35,7 @@ const Footer = () => {
               </div>
               <div>
                 <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Secure Payment</h4>
-                <p className="text-xs text-slate-500">256-bit SSL Razorpay encryption</p>
+                <p className="text-xs text-slate-500">256-bit SSL encryption</p>
               </div>
             </div>
 
@@ -101,9 +101,7 @@ const Footer = () => {
             <h5 className="text-xs font-bold uppercase text-slate-900 tracking-wider mb-4">Customer Care</h5>
             <ul className="space-y-2.5 text-xs text-slate-600">
               <li><Link to="/orders" className="hover:text-slate-950 transition">Track Your Order</Link></li>
-              <li><Link to="/booking" className="hover:text-slate-950 transition">Book Stylist Session</Link></li>
               <li><Link to="/chat" className="hover:text-slate-950 transition">Live Chat Support</Link></li>
-              <li><Link to="/contact" className="hover:text-slate-950 transition">Contact & Inquiries</Link></li>
               <li><Link to="/testimonials" className="hover:text-slate-950 transition">Verified Reviews</Link></li>
             </ul>
           </div>

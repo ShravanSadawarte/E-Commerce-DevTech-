@@ -13,8 +13,6 @@ import CategoryPage from './pages/CategoryPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import SearchResultsPage from './pages/SearchResultsPage';
 import TestimonialsPage from './pages/TestimonialsPage';
-import BookingPage from './pages/BookingPage';
-import ContactPage from './pages/ContactPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
@@ -40,8 +38,6 @@ import AdminCategoriesPage from './pages/AdminCategoriesPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminUsersPage from './pages/AdminUsersPage';
 import AdminReviewsPage from './pages/AdminReviewsPage';
-import AdminBookingsPage from './pages/AdminBookingsPage';
-import AdminMessagesPage from './pages/AdminMessagesPage';
 import AdminChatPage from './pages/AdminChatPage';
 
 // Actions
@@ -102,8 +98,6 @@ function App() {
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/testimonials" element={<TestimonialsPage />} />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/contact" element={<ContactPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -147,8 +141,6 @@ function App() {
         <Route path="orders" element={<AdminOrdersPage />} />
         <Route path="users" element={<AdminUsersPage />} />
         <Route path="reviews" element={<AdminReviewsPage />} />
-        <Route path="bookings" element={<AdminBookingsPage />} />
-        <Route path="messages" element={<AdminMessagesPage />} />
         <Route path="chat" element={<AdminChatPage />} />
       </Route>
 

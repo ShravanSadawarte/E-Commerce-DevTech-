@@ -1,21 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import confetti from 'canvas-confetti';
-import { CheckCircle, Package, ArrowRight, Home } from 'lucide-react';
+import { CheckCircle, Package, Home } from 'lucide-react';
 
 const OrderSuccessPage = () => {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
   const orderNumber = searchParams.get('orderNumber');
-
-  useEffect(() => {
-    // Trigger celebratory confetti
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 },
-    });
-  }, []);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-20 text-center space-y-8 animate-in fade-in zoom-in-95 duration-500">

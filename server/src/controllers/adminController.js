@@ -11,11 +11,8 @@ const {
   OrderItem,
   Payment,
   Review,
-  Booking,
-  ContactMessage,
   Conversation,
   Message,
-  AuditLog,
 } = require('../models');
 const { successResponse, errorResponse } = require('../utils/responseHandler');
 
@@ -545,71 +542,7 @@ const deleteAdminReview = async (req, res, next) => {
   }
 };
 
-// 7. Booking Management
-const getAdminBookings = async (req, res, next) => {
-  try {
-    const bookings = await Booking.findAll({
-      order: [['date', 'DESC'], ['timeSlot', 'ASC']],
-    });
-    return successResponse(res, { bookings });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const updateAdminBookingStatus = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { status, notes } = req.body;
-
-    const booking = await Booking.findByPk(id);
-    if (!booking) {
-      return errorResponse(res, 'Booking not found', 404, 'BOOKING_NOT_FOUND');
-    }
-
-    if (status) booking.status = status;
-    if (notes !== undefined) booking.notes = notes;
-
-    await booking.save();
-    return successResponse(res, { booking }, 'Booking status updated successfully');
-  } catch (error) {
-    next(error);
-  }
-};
-
-// 8. Contact Messages Management
-const getAdminContactMessages = async (req, res, next) => {
-  try {
-    const messages = await ContactMessage.findAll({
-      order: [['createdAt', 'DESC']],
-    });
-    return successResponse(res, { messages });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const updateAdminContactMessageStatus = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { status, replyNotes } = req.body;
-
-    const message = await ContactMessage.findByPk(id);
-    if (!message) {
-      return errorResponse(res, 'Message not found', 404, 'MESSAGE_NOT_FOUND');
-    }
-
-    if (status) message.status = status;
-    if (replyNotes !== undefined) message.replyNotes = replyNotes;
-
-    await message.save();
-    return successResponse(res, { message }, 'Message status updated');
-  } catch (error) {
-    next(error);
-  }
-};
-
-// 9. Admin Chat Management
+// 8. Admin Chat Management
 const getAdminConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.findAll({
@@ -693,10 +626,6 @@ module.exports = {
   getAdminReviews,
   updateAdminReviewStatus,
   deleteAdminReview,
-  getAdminBookings,
-  updateAdminBookingStatus,
-  getAdminContactMessages,
-  updateAdminContactMessageStatus,
   getAdminConversations,
   getAdminConversationMessages,
   sendAdminChatMessage,

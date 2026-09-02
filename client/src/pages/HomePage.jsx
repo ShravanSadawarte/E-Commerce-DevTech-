@@ -104,12 +104,6 @@ const HomePage = () => {
                 <span>{slide.ctaText}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/booking"
-                className="rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-colors hover:bg-white/10"
-              >
-                Book Stylist
-              </Link>
             </div>
           </div>
         </div>
@@ -223,32 +217,7 @@ const HomePage = () => {
         )}
       </section>
 
-      {/* 4. STYLIST APPOINTMENT PROMO BANNER */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl overflow-hidden bg-slate-900 text-white p-8 sm:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-8 card-shadow">
-          <div className="max-w-xl space-y-4 text-center lg:text-left">
-            <span className="text-[11px] font-bold tracking-widest uppercase bg-white/10 text-blue-300 border border-white/20 px-3 py-1 rounded-full">
-              Bespoke Styling Service
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
-              Book a 1-on-1 Consultation with our Master Wardrobe Stylists
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Receive personalized fashion curation, fabric advice, and custom fitting recommendations via private virtual calendar sessions.
-            </p>
-          </div>
-          <div>
-            <Link
-              to="/booking"
-              className="bg-white hover:bg-slate-100 text-slate-950 font-extrabold text-xs px-8 py-4 rounded-full uppercase tracking-wider shadow-2xl transition hover:scale-105 inline-block"
-            >
-              BOOK CALENDAR SLOT
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. TESTIMONIALS SECTION */}
+      {/* 4. TESTIMONIALS SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="text-[11px] font-bold tracking-widest uppercase text-[var(--color-primary)]">Client Endorsements</span>

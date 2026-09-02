@@ -5,7 +5,7 @@ const createOrder = async (req, res, next) => {
   const transaction = await sequelize.transaction();
   try {
     const userId = req.user.id;
-    const { addressId, paymentMethod = 'RAZORPAY', notes } = req.body;
+    const { addressId, paymentMethod = 'COD', notes } = req.body;
 
     if (!addressId) {
       await transaction.rollback();
@@ -138,7 +138,7 @@ const createOrder = async (req, res, next) => {
     await Payment.create({
       orderId: order.id,
       userId,
-      provider: paymentMethod === 'COD' ? 'COD' : 'RAZORPAY',
+      provider: paymentMethod === 'COD' ? 'COD' : 'COD',
       amount: totalAmount,
       currency: 'INR',
       status: 'Pending',

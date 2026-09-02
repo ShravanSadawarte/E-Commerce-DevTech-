@@ -35,14 +35,6 @@ router.get('/reviews', adminController.getAdminReviews);
 router.put('/reviews/:id/status', adminController.updateAdminReviewStatus);
 router.delete('/reviews/:id', adminController.deleteAdminReview);
 
-// Bookings
-router.get('/bookings', adminController.getAdminBookings);
-router.put('/bookings/:id/status', adminController.updateAdminBookingStatus);
-
-// Contact Messages
-router.get('/messages', adminController.getAdminContactMessages);
-router.put('/messages/:id/status', adminController.updateAdminContactMessageStatus);
-
 // Live Chat Support Console
 router.get('/conversations', adminController.getAdminConversations);
 router.get('/conversations/:id', adminController.getAdminConversationMessages);

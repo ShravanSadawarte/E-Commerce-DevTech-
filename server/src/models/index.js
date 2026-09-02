@@ -16,12 +16,8 @@ const OrderItem = require('./OrderItem');
 const Payment = require('./Payment');
 const Review = require('./Review');
 const Testimonial = require('./Testimonial');
-const Booking = require('./Booking');
-const ContactMessage = require('./ContactMessage');
 const Conversation = require('./Conversation');
 const Message = require('./Message');
-const Coupon = require('./Coupon');
-const AuditLog = require('./AuditLog');
 
 // 1. User Associations
 User.hasMany(Address, { foreignKey: 'userId', as: 'addresses', onDelete: 'CASCADE' });
@@ -38,9 +34,6 @@ Order.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 User.hasMany(Review, { foreignKey: 'userId', as: 'reviews', onDelete: 'CASCADE' });
 Review.belongsTo(User, { foreignKey: 'userId', as: 'user' });
-
-User.hasMany(Booking, { foreignKey: 'userId', as: 'bookings' });
-Booking.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
 User.hasMany(Conversation, { foreignKey: 'userId', as: 'conversations' });
 Conversation.belongsTo(User, { foreignKey: 'userId', as: 'user' });
@@ -109,10 +102,6 @@ module.exports = {
   Payment,
   Review,
   Testimonial,
-  Booking,
-  ContactMessage,
   Conversation,
   Message,
-  Coupon,
-  AuditLog,
 };

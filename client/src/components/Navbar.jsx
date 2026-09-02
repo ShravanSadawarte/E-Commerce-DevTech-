@@ -10,7 +10,6 @@ import {
   User as UserIcon,
   LogOut,
   Package,
-  Calendar,
   MessageSquare,
   Shield,
   ChevronDown,
@@ -149,9 +148,8 @@ const Navbar = () => {
                 </div>
               </div>
               <Link to="/category/deals" className="font-semibold text-[var(--color-error)] hover:text-red-700">Deals</Link>
-              <Link to="/booking" className="hover:text-slate-950 transition-colors">Book Appointment</Link>
               <Link to="/testimonials" className="hover:text-slate-950 transition-colors">Testimonials</Link>
-              <Link to="/contact" className="hover:text-slate-950 transition-colors">Contact</Link>
+              <Link to="/chat" className="hover:text-slate-950 transition-colors">Live Chat</Link>
             </nav>
           </div>
 
@@ -288,13 +286,6 @@ const Navbar = () => {
                         My Orders
                       </Link>
                       <Link
-                        to="/booking"
-                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 transition"
-                      >
-                        <Calendar className="w-4 h-4 text-slate-500" />
-                        Bookings
-                      </Link>
-                      <Link
                         to="/chat"
                         className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 transition"
                       >
@@ -387,14 +378,8 @@ const Navbar = () => {
                   </Link>
                 ))}
               </div>
-              <Link to="/booking" className="block py-2.5 px-3 rounded-lg text-sm font-medium text-slate-900 hover:bg-slate-50">
-                Book Stylist Appointment
-              </Link>
               <Link to="/testimonials" className="block py-2.5 px-3 rounded-lg text-sm font-medium text-slate-900 hover:bg-slate-50">
                 Testimonials
-              </Link>
-              <Link to="/contact" className="block py-2.5 px-3 rounded-lg text-sm font-medium text-slate-900 hover:bg-slate-50">
-                Contact Us
               </Link>
               <Link to="/chat" className="block py-2.5 px-3 rounded-lg text-sm font-medium text-[var(--color-primary)] hover:bg-blue-50">
                 Live Support Chat

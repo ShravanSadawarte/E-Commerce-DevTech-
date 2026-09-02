@@ -8,8 +8,6 @@ import {
   ShoppingBag,
   Users,
   Star,
-  Calendar,
-  Mail,
   MessageSquare,
   LogOut,
   ChevronRight,
@@ -35,8 +33,6 @@ const AdminLayout = () => {
     { label: 'Orders', path: '/admin/orders', icon: ShoppingBag },
     { label: 'Customers', path: '/admin/users', icon: Users },
     { label: 'Reviews', path: '/admin/reviews', icon: Star },
-    { label: 'Bookings', path: '/admin/bookings', icon: Calendar },
-    { label: 'Messages', path: '/admin/messages', icon: Mail },
     { label: 'Live Chat', path: '/admin/chat', icon: MessageSquare },
   ];
 
