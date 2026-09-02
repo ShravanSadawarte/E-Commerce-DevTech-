@@ -12,10 +12,10 @@ async function runTests() {
   await sequelize.sync();
 
   const server = http.createServer(app);
-  await new Promise((resolve) => server.listen(5099, resolve));
+  await new Promise((resolve) => server.listen(5099, '127.0.0.1', resolve));
   console.log('[Test Server] Listening on port 5099');
 
-  const baseUrl = 'http://localhost:5099/api';
+  const baseUrl = 'http://127.0.0.1:5099/api';
 
   async function request(path, options = {}) {
     const url = `${baseUrl}${path}`;
