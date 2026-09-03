@@ -29,20 +29,16 @@ const startServer = async () => {
   try {
     await testConnection();
 
-    // Sync database schema — alter:true auto-migrates SQLite when models change (dev convenience)
-    // In production with MySQL, use migrations; alter is safe for SQLite fallback.
-    const syncOptions = process.env.NODE_ENV === 'production' && process.env.DB_DIALECT === 'mysql'
-      ? { alter: false }
-      : { alter: true };
+    // Sync database schema — use alter:false to preserve dummy data in production/interview demo
+    // Dummy data is pre-seeded via `npm run seed`; alter:false keeps it intact.
     try {
-      await sequelize.sync(syncOptions);
+      await sequelize.sync({ alter: false });
     } catch (syncErr) {
-      // Stale SQLite file (e.g. missing parentId column) — recreate
-      console.warn('[DB] Sync failed, attempting recovery:', syncErr.message);
+      // Stale SQLite file (e.g. missing parentId column on first clone) — try alter:true once
+      console.warn('[DB] Sync failed, attempting alter sync:', syncErr.message);
       if (process.env.DB_DIALECT !== 'mysql') {
-        await sequelize.sync({ force: true });
-        console.log('[DB] Database recreated via force sync');
-        // Re-seed would be needed externally — don't auto-seed here
+        await sequelize.sync({ alter: true });
+        console.log('[DB] Database migrated via alter sync');
       } else {
         throw syncErr;
       }

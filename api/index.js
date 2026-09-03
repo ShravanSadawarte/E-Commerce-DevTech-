@@ -5,8 +5,8 @@ let isDbInitialized = false;
 
 async function ensureDb() {
   if (!isDbInitialized) {
-    // Use alter:true so Vercel's ephemeral /tmp SQLite auto-migrates when models change
-    await sequelize.sync({ alter: true });
+    // Use alter:false to preserve dummy data; ephemeral /tmp still works per cold start
+    await sequelize.sync({ alter: false });
     isDbInitialized = true;
     console.log('[Vercel] Database synced');
   }
