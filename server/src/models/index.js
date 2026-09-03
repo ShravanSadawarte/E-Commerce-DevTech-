@@ -15,7 +15,6 @@ const Order = require('./Order');
 const OrderItem = require('./OrderItem');
 const Payment = require('./Payment');
 const Review = require('./Review');
-const Testimonial = require('./Testimonial');
 const Conversation = require('./Conversation');
 const Message = require('./Message');
 
@@ -101,7 +100,6 @@ module.exports = {
   OrderItem,
   Payment,
   Review,
-  Testimonial,
   Conversation,
   Message,
 };

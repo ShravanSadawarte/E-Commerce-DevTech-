@@ -9,7 +9,6 @@ const wishlistRoutes = require('./wishlistRoutes');
 const addressRoutes = require('./addressRoutes');
 const orderRoutes = require('./orderRoutes');
 const reviewRoutes = require('./reviewRoutes');
-const testimonialRoutes = require('./testimonialRoutes');
 const chatRoutes = require('./chatRoutes');
 const adminRoutes = require('./adminRoutes');
 
@@ -21,7 +20,6 @@ router.use('/wishlist', wishlistRoutes);
 router.use('/addresses', addressRoutes);
 router.use('/orders', orderRoutes);
 router.use('/reviews', reviewRoutes);
-router.use('/testimonials', testimonialRoutes);
 router.use('/chat', chatRoutes);
 router.use('/admin', adminRoutes);
 

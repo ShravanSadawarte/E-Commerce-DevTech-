@@ -12,7 +12,6 @@ import HomePage from './pages/HomePage';
 import CategoryPage from './pages/CategoryPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import SearchResultsPage from './pages/SearchResultsPage';
-import TestimonialsPage from './pages/TestimonialsPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
@@ -37,7 +36,6 @@ import AdminProductCreateEditPage from './pages/AdminProductCreateEditPage';
 import AdminCategoriesPage from './pages/AdminCategoriesPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminUsersPage from './pages/AdminUsersPage';
-import AdminReviewsPage from './pages/AdminReviewsPage';
 import AdminChatPage from './pages/AdminChatPage';
 
 // Actions
@@ -97,7 +95,6 @@ function App() {
         <Route path="/category/:slug" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/search" element={<SearchResultsPage />} />
-        <Route path="/testimonials" element={<TestimonialsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -140,7 +137,6 @@ function App() {
         <Route path="categories" element={<AdminCategoriesPage />} />
         <Route path="orders" element={<AdminOrdersPage />} />
         <Route path="users" element={<AdminUsersPage />} />
-        <Route path="reviews" element={<AdminReviewsPage />} />
         <Route path="chat" element={<AdminChatPage />} />
       </Route>
 

@@ -15,7 +15,6 @@ const {
   OrderItem,
   Payment,
   Review,
-  Testimonial,
   Conversation,
   Message,
 } = require('../models');
@@ -1089,39 +1088,7 @@ const seedDatabase = async () => {
       isApproved: true,
     });
 
-    // 9. Seed Testimonials
-    const testimonialsData = [
-      {
-        name: 'Emily Watson',
-        role: 'Verified Customer • London',
-        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
-        comment: 'DevTech transformed how I shop online. The product quality exceeded my highest expectations and delivery took only two days!',
-        isFeatured: true,
-      },
-      {
-        name: 'Marcus Chen',
-        role: 'Verified Buyer • New York',
-        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
-        comment: 'The attention to detail in the packaging and craftsmanship of the leather goods is unmatched. Customer support was incredibly swift.',
-        isFeatured: true,
-      },
-      {
-        name: 'Sophia Laurent',
-        role: 'Fashion Stylist • Paris',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-        rating: 5,
-        comment: 'I recommend DevTech curated collections to all my private styling clients. Clean silhouettes, enduring materials, and effortless checkout.',
-        isFeatured: true,
-      },
-    ];
-
-    for (const t of testimonialsData) {
-      await Testimonial.create(t);
-    }
-
-    // 10. Seed Conversation & Messages
+    // 9. Seed Conversation & Messages
     const conv = await Conversation.create({
       userId: customer1.id,
       userName: customer1.name,

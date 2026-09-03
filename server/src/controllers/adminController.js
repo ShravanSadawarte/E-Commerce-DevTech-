@@ -492,56 +492,6 @@ const updateAdminUserStatus = async (req, res, next) => {
   }
 };
 
-// 6. Review Moderation
-const getAdminReviews = async (req, res, next) => {
-  try {
-    const reviews = await Review.findAll({
-      include: [
-        { model: User, as: 'user', attributes: ['id', 'name', 'email'] },
-        { model: Product, as: 'product', attributes: ['id', 'name'] },
-      ],
-      order: [['createdAt', 'DESC']],
-    });
-    return successResponse(res, { reviews });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const updateAdminReviewStatus = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { isApproved } = req.body;
-
-    const review = await Review.findByPk(id);
-    if (!review) {
-      return errorResponse(res, 'Review not found', 404, 'REVIEW_NOT_FOUND');
-    }
-
-    review.isApproved = isApproved;
-    await review.save();
-
-    return successResponse(res, { review }, 'Review approval status updated');
-  } catch (error) {
-    next(error);
-  }
-};
-
-const deleteAdminReview = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const review = await Review.findByPk(id);
-    if (!review) {
-      return errorResponse(res, 'Review not found', 404, 'REVIEW_NOT_FOUND');
-    }
-
-    await review.destroy();
-    return successResponse(res, {}, 'Review deleted successfully');
-  } catch (error) {
-    next(error);
-  }
-};
-
 // 8. Admin Chat Management
 const getAdminConversations = async (req, res, next) => {
   try {
@@ -623,9 +573,6 @@ module.exports = {
   updateAdminOrderStatus,
   getAdminUsers,
   updateAdminUserStatus,
-  getAdminReviews,
-  updateAdminReviewStatus,
-  deleteAdminReview,
   getAdminConversations,
   getAdminConversationMessages,
   sendAdminChatMessage,

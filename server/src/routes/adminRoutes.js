@@ -30,11 +30,6 @@ router.put('/orders/:id/status', adminController.updateAdminOrderStatus);
 router.get('/users', adminController.getAdminUsers);
 router.put('/users/:id/status', adminController.updateAdminUserStatus);
 
-// Reviews
-router.get('/reviews', adminController.getAdminReviews);
-router.put('/reviews/:id/status', adminController.updateAdminReviewStatus);
-router.delete('/reviews/:id', adminController.deleteAdminReview);
-
 // Live Chat Support Console
 router.get('/conversations', adminController.getAdminConversations);
 router.get('/conversations/:id', adminController.getAdminConversationMessages);
