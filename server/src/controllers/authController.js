@@ -159,9 +159,28 @@ const updateProfile = async (req, res, next) => {
     const { name, phone, avatar } = req.body;
     const user = req.user;
 
-    if (name) user.name = name;
-    if (phone !== undefined) user.phone = phone;
-    if (avatar) user.avatar = avatar;
+    if (name !== undefined) {
+      if (typeof name !== 'string' || name.trim().length < 2 || name.trim().length > 100) {
+        return errorResponse(res, 'Name must be 2-100 characters', 400, 'VALIDATION_ERROR');
+      }
+      user.name = name.trim();
+    }
+    if (phone !== undefined) {
+      if (phone && (typeof phone !== 'string' || phone.length > 20)) {
+        return errorResponse(res, 'Invalid phone number', 400, 'VALIDATION_ERROR');
+      }
+      user.phone = phone || null;
+    }
+    if (avatar !== undefined) {
+      if (avatar && typeof avatar !== 'string') {
+        return errorResponse(res, 'Invalid avatar', 400, 'VALIDATION_ERROR');
+      }
+      // Basic URL validation – prevent XSS via javascript: URLs
+      if (avatar && !/^https?:\/\/.+/.test(avatar)) {
+        return errorResponse(res, 'Avatar must be a valid http(s) URL', 400, 'VALIDATION_ERROR');
+      }
+      user.avatar = avatar || user.avatar;
+    }
 
     await user.save();
 
@@ -181,7 +200,8 @@ const updateProfile = async (req, res, next) => {
 };
 
 const logout = async (req, res) => {
-  res.clearCookie('token');
+  const { cookieOptions } = require('../config/jwt');
+  res.clearCookie('token', cookieOptions);
   return successResponse(res, {}, 'Logged out successfully');
 };
 
@@ -203,7 +223,11 @@ const forgotPassword = async (req, res, next) => {
     user.resetPasswordExpires = new Date(Date.now() + 3600000); // 1 hour
     await user.save();
 
-    return successResponse(res, { resetToken }, 'Password reset instructions generated. Use the reset token provided.');
+    // SECURITY: Never expose resetToken in response – send via email in production
+    // For dev, log token server-side only
+    console.log(`[PasswordReset] Token for ${email}: ${resetToken} (expires in 1h)`);
+
+    return successResponse(res, {}, 'If that email is registered, password reset instructions have been generated.');
   } catch (error) {
     next(error);
   }
@@ -215,6 +239,9 @@ const resetPassword = async (req, res, next) => {
 
     if (!email || !token || !newPassword) {
       return errorResponse(res, 'Email, reset token, and new password are required.', 400, 'VALIDATION_ERROR');
+    }
+    if (newPassword.length < 6 || newPassword.length > 128) {
+      return errorResponse(res, 'Password must be 6-128 characters', 400, 'WEAK_PASSWORD');
     }
 
     const user = await User.findOne({

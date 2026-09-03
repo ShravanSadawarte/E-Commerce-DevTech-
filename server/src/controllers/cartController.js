@@ -70,10 +70,15 @@ const getCart = async (req, res, next) => {
 const addToCart = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const { productId, variantId, quantity = 1 } = req.body;
+    let { productId, variantId, quantity = 1 } = req.body;
 
     if (!productId) {
       return errorResponse(res, 'Product ID is required', 400, 'VALIDATION_ERROR');
+    }
+
+    quantity = parseInt(quantity, 10);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+      return errorResponse(res, 'Quantity must be an integer between 1 and 99', 400, 'INVALID_QUANTITY');
     }
 
     const product = await Product.findByPk(productId);
@@ -132,10 +137,11 @@ const updateCartItem = async (req, res, next) => {
   try {
     const userId = req.user.id;
     const { itemId } = req.params;
-    const { quantity } = req.body;
+    let { quantity } = req.body;
 
-    if (!quantity || quantity < 1) {
-      return errorResponse(res, 'Quantity must be at least 1', 400, 'INVALID_QUANTITY');
+    quantity = parseInt(quantity, 10);
+    if (!Number.isInteger(quantity) || quantity < 1 || quantity > 99) {
+      return errorResponse(res, 'Quantity must be an integer between 1 and 99', 400, 'INVALID_QUANTITY');
     }
 
     const [cart] = await Cart.findOrCreate({ where: { userId } });

@@ -84,13 +84,17 @@ const createOrder = async (req, res, next) => {
         totalPrice: parseFloat(itemTotal.toFixed(2)),
       });
 
-      // Deduct stock
+      // Deduct stock – variant stock is authoritative when variant exists
       if (variant) {
         variant.stock -= item.quantity;
         await variant.save({ transaction });
+        // Keep product stock in sync (decrement only once per item)
+        product.stock = Math.max(0, product.stock - item.quantity);
+        await product.save({ transaction });
+      } else {
+        product.stock -= item.quantity;
+        await product.save({ transaction });
       }
-      product.stock -= item.quantity;
-      await product.save({ transaction });
     }
 
     const tax = parseFloat((subtotal * 0.05).toFixed(2));

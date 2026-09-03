@@ -80,12 +80,13 @@ const getProducts = async (req, res, next) => {
       where.stock = { [Op.gt]: 0 };
     }
 
-    // Search query
+    // Search query – escape LIKE wildcards to prevent pattern injection
     if (search) {
+      const escaped = search.replace(/[%_\\]/g, '\\$&').substring(0, 100);
       where[Op.or] = [
-        { name: { [Op.like]: `%${search}%` } },
-        { description: { [Op.like]: `%${search}%` } },
-        { shortDescription: { [Op.like]: `%${search}%` } },
+        { name: { [Op.like]: `%${escaped}%` } },
+        { description: { [Op.like]: `%${escaped}%` } },
+        { shortDescription: { [Op.like]: `%${escaped}%` } },
       ];
     }
 

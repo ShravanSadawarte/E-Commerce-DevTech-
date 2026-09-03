@@ -57,7 +57,10 @@ const testConnection = async () => {
   } catch (error) {
     console.error(`[DB] Database connection error:`, error.message);
     if (dialect === 'mysql') {
-      console.warn(`[DB] Falling back to SQLite for zero-downtime execution...`);
+      if (process.env.NODE_ENV === 'production') {
+        throw error; // In production with MySQL, fail fast – no silent SQLite fallback
+      }
+      console.warn(`[DB] Falling back to SQLite for development execution...`);
       sequelize = new Sequelize({
         dialect: 'sqlite',
         storage: isVercel ? '/tmp/database.sqlite' : path.resolve(__dirname, '../../database.sqlite'),
@@ -65,6 +68,8 @@ const testConnection = async () => {
       });
       await sequelize.authenticate();
       console.log(`[DB] Successfully initialized fallback SQLite database.`);
+    } else {
+      throw error;
     }
   }
 };
