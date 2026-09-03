@@ -95,6 +95,7 @@ const ProductDetailsPage = () => {
   const price = parseFloat(product.price);
   const discountPrice = product.discountPrice ? parseFloat(product.discountPrice) : null;
   const effectivePrice = discountPrice || price;
+  const hasDiscount = discountPrice && discountPrice < price;
   const availableStock = selectedVariant ? selectedVariant.stock : product.stock;
 
   const images = product.images && product.images.length > 0

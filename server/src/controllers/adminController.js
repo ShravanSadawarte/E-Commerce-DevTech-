@@ -80,8 +80,10 @@ const getDashboardStats = async (req, res, next) => {
 // 2. Product Management
 const getAdminProducts = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 20;
+    let page = parseInt(req.query.page, 10) || 1;
+    let limit = parseInt(req.query.limit, 10) || 20;
+    page = Math.max(1, page);
+    limit = Math.min(Math.max(1, limit), 50);
     const offset = (page - 1) * limit;
     const { search, categoryId } = req.query;
 
@@ -392,8 +394,10 @@ const deleteAdminCategory = async (req, res, next) => {
 // 4. Order Management
 const getAdminOrders = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 20;
+    let page = parseInt(req.query.page, 10) || 1;
+    let limit = parseInt(req.query.limit, 10) || 20;
+    page = Math.max(1, page);
+    limit = Math.min(Math.max(1, limit), 50);
     const offset = (page - 1) * limit;
     const { status, paymentStatus, search } = req.query;
 

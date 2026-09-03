@@ -4,8 +4,10 @@ const { successResponse, errorResponse } = require('../utils/responseHandler');
 
 const getProducts = async (req, res, next) => {
   try {
-    const page = parseInt(req.query.page, 10) || 1;
-    const limit = parseInt(req.query.limit, 10) || 12;
+    let page = parseInt(req.query.page, 10) || 1;
+    let limit = parseInt(req.query.limit, 10) || 12;
+    page = Math.max(1, page);
+    limit = Math.min(Math.max(1, limit), 50);
     const offset = (page - 1) * limit;
 
     const {
