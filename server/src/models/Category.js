@@ -29,11 +29,28 @@ const Category = sequelize.define('Category', {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
+  parentId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: { model: 'categories', key: 'id' },
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE',
+  },
+  sortOrder: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  level: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
 }, {
   tableName: 'categories',
   timestamps: true,
   indexes: [
     { unique: true, fields: ['slug'] },
+    { fields: ['parentId'] },
+    { fields: ['sortOrder'] },
   ],
 });
 

@@ -24,21 +24,37 @@ const getProducts = async (req, res, next) => {
 
     const where = { status: true };
 
-    // Category filter by slug or ID
+    // Category filter by slug or ID — includes descendants (hierarchical)
+    const getDescendantIds = async (rootId) => {
+      const all = await Category.findAll({ attributes: ['id', 'parentId'], raw: true });
+      const ids = [rootId];
+      const stack = [rootId];
+      while (stack.length) {
+        const pid = stack.pop();
+        const children = all.filter((c) => c.parentId === pid);
+        for (const ch of children) { ids.push(ch.id); stack.push(ch.id); }
+      }
+      return ids;
+    };
+
     if (category) {
+      let categoryIds = null;
       if (!isNaN(category)) {
-        where.categoryId = category;
+        const cat = await Category.findByPk(parseInt(category, 10));
+        if (!cat) {
+          return successResponse(res, { products: [], pagination: { total: 0, page, limit, totalPages: 0, hasNext: false, hasPrev: false } });
+        }
+        categoryIds = await getDescendantIds(cat.id);
       } else {
         const cat = await Category.findOne({ where: { slug: category } });
         if (cat) {
-          where.categoryId = cat.id;
+          categoryIds = await getDescendantIds(cat.id);
         } else {
-          return successResponse(res, {
-            products: [],
-            pagination: { total: 0, page, limit, totalPages: 0, hasNext: false, hasPrev: false },
-          });
+          // try search by category name fallback (for search "sneakers" etc.)
+          return successResponse(res, { products: [], pagination: { total: 0, page, limit, totalPages: 0, hasNext: false, hasPrev: false } });
         }
       }
+      if (categoryIds) where.categoryId = { [Op.in]: categoryIds };
     }
 
     // Brand filter
@@ -81,13 +97,50 @@ const getProducts = async (req, res, next) => {
     }
 
     // Search query – escape LIKE wildcards to prevent pattern injection
+    // Search across product name/description + brand + category (including descendants)
     if (search) {
       const escaped = search.replace(/[%_\\]/g, '\\$&').substring(0, 100);
-      where[Op.or] = [
-        { name: { [Op.like]: `%${escaped}%` } },
-        { description: { [Op.like]: `%${escaped}%` } },
-        { shortDescription: { [Op.like]: `%${escaped}%` } },
+      const like = `%${escaped}%`;
+      const orConditions = [
+        { name: { [Op.like]: like } },
+        { description: { [Op.like]: like } },
+        { shortDescription: { [Op.like]: like } },
       ];
+
+      // Brand match
+      const brandMatches = await Brand.findAll({
+        where: { [Op.or]: [{ name: { [Op.like]: like } }, { slug: { [Op.like]: like } }] },
+        attributes: ['id'],
+        raw: true,
+      });
+      if (brandMatches.length) orConditions.push({ brandId: { [Op.in]: brandMatches.map((b) => b.id) } });
+
+      // Category match (including descendants)
+      const catMatches = await Category.findAll({
+        where: { [Op.or]: [{ name: { [Op.like]: like } }, { slug: { [Op.like]: like } }] },
+        attributes: ['id', 'parentId'],
+        raw: true,
+      });
+      if (catMatches.length) {
+        const allCats = await Category.findAll({ attributes: ['id', 'parentId'], raw: true });
+        const catIds = new Set();
+        const collect = (rootId) => {
+          catIds.add(rootId);
+          allCats.filter((c) => c.parentId === rootId).forEach((ch) => collect(ch.id));
+        };
+        catMatches.forEach((cm) => collect(cm.id));
+        orConditions.push({ categoryId: { [Op.in]: [...catIds] } });
+      }
+
+      // Preserve existing category filter AND search OR
+      // If where already has categoryId from ?category, combine via Op.and
+      if (where.categoryId) {
+        const existingCat = where.categoryId;
+        delete where.categoryId;
+        where[Op.and] = [{ categoryId: existingCat }, { [Op.or]: orConditions }];
+      } else {
+        where[Op.or] = orConditions;
+      }
     }
 
     // Sorting

@@ -37,7 +37,10 @@ Review.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 User.hasMany(Conversation, { foreignKey: 'userId', as: 'conversations' });
 Conversation.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
-// 2. Catalog Associations
+// 2. Catalog Associations — hierarchical Category
+Category.hasMany(Category, { foreignKey: 'parentId', as: 'children', onDelete: 'SET NULL' });
+Category.belongsTo(Category, { foreignKey: 'parentId', as: 'parent' });
+
 Category.hasMany(Product, { foreignKey: 'categoryId', as: 'products' });
 Product.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
 
