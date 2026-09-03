@@ -10,6 +10,7 @@ const addressRoutes = require('./addressRoutes');
 const orderRoutes = require('./orderRoutes');
 const reviewRoutes = require('./reviewRoutes');
 const chatRoutes = require('./chatRoutes');
+const geminiRoutes = require('./geminiRoutes');
 const adminRoutes = require('./adminRoutes');
 
 router.use('/auth', authRoutes);
@@ -21,6 +22,7 @@ router.use('/addresses', addressRoutes);
 router.use('/orders', orderRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/chat', chatRoutes);
+router.use('/gemini', geminiRoutes);
 router.use('/admin', adminRoutes);
 
 // Root health check endpoint

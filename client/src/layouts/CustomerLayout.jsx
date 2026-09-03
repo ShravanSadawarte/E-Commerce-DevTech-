@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingChatWidget from '../components/FloatingChatWidget';
+import GeminiChatbot from '../components/GeminiChatbot';
 
 const CustomerLayout = () => {
   return (
@@ -13,6 +14,7 @@ const CustomerLayout = () => {
       </main>
       <Footer />
       <FloatingChatWidget />
+      <GeminiChatbot />
     </div>
   );
 };
