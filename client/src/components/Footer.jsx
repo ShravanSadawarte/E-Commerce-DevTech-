@@ -8,8 +8,7 @@ const Footer = () => {
       <div className="section-shell py-12">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <Link to="/" className="inline-flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-white font-black text-[13px]">N</div>
+            <Link to="/" className="inline-flex items-center gap-2">
               <span className="text-[18px] font-black tracking-tight text-slate-900">NEXORA</span>
             </Link>
             <p className="mt-3 max-w-sm text-[13px] leading-6 text-slate-500">Premium essentials, curated for everyday life. Quality materials, timeless design, fair pricing.</p>
@@ -37,7 +36,6 @@ const Footer = () => {
             <ul className="mt-4 space-y-2.5 text-[13px]">
               <li><Link to="/orders" className="text-slate-600 hover:text-slate-900">Track order</Link></li>
               <li><Link to="/chat" className="text-slate-600 hover:text-slate-900">Live chat</Link></li>
-              <li><Link to="/testimonials" className="text-slate-600 hover:text-slate-900">Reviews</Link></li>
               <li><span className="text-slate-400">Shipping & returns</span></li>
             </ul>
           </div>

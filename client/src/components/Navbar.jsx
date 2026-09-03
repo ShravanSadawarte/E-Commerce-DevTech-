@@ -86,8 +86,7 @@ const Navbar = () => {
               aria-label="Menu"
             ><Menu className="w-5 h-5" /></button>
 
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white font-black text-[13px] tracking-tight">N</div>
+            <Link to="/" className="flex items-center gap-2">
               <span className="text-[20px] font-black tracking-[-0.04em] text-slate-900">NEXORA</span>
               <span className="hidden sm:inline text-[10px] font-bold tracking-[0.16em] uppercase text-slate-400 border-l border-slate-200 pl-2.5 ml-1">Store</span>
             </Link>
@@ -110,7 +109,6 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
-              <Link to="/testimonials" className={`px-3 py-2 rounded-full text-[13px] font-medium transition ${isActive('/testimonials') ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}>Reviews</Link>
               <Link to="/chat" className={`px-3 py-2 rounded-full text-[13px] font-medium transition ${isActive('/chat') ? 'bg-slate-900 text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'}`}>Support</Link>
             </nav>
           </div>
@@ -218,7 +216,6 @@ const Navbar = () => {
               {categories.slice(0, 8).map((cat) => (
                 <Link key={cat.id} to={`/category/${cat.slug}`} className="block rounded-xl px-3 py-2.5 text-[13px] font-medium text-slate-700 hover:bg-slate-50">{cat.name}</Link>
               ))}
-              <Link to="/testimonials" className="flex items-center justify-between rounded-xl px-3 py-3 text-[14px] font-semibold hover:bg-slate-50">Reviews <ChevronRight className="w-4 h-4 text-slate-300" /></Link>
               <Link to="/chat" className="flex items-center justify-between rounded-xl px-3 py-3 text-[14px] font-semibold text-blue-600 hover:bg-blue-50">Live support <ChevronRight className="w-4 h-4" /></Link>
               {isAdmin && <Link to="/admin/dashboard" className="flex items-center justify-between rounded-xl bg-slate-900 px-3 py-3 text-[14px] font-semibold text-white">Admin dashboard <ChevronRight className="w-4 h-4" /></Link>}
             </div>

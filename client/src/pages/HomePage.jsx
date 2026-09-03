@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ArrowRight, ChevronLeft, ChevronRight, Star, Sparkles, ArrowUpRight, ShieldCheck, Truck, RotateCcw, Headphones } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, ArrowUpRight, ShieldCheck, Truck, RotateCcw, Headphones } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { fetchProducts, fetchCategories } from '../store/productSlice';
-import api from '../services/api';
 
 const HERO_SLIDES = [
   {
@@ -37,12 +36,10 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const { products, categories, loading } = useSelector((state) => state.products);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
     dispatch(fetchProducts({ limit: 8, featured: true }));
     dispatch(fetchCategories());
-    api.get('/testimonials').then((r) => setTestimonials(r.data?.testimonials || [])).catch(() => {});
   }, [dispatch]);
 
   useEffect(() => {
@@ -69,9 +66,6 @@ const HomePage = () => {
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <Link to={slide.link} className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3.5 text-[13px] font-semibold tracking-wide text-white hover:bg-black transition shadow-sm">
                   {slide.cta} <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link to="/testimonials" className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-5 py-3.5 text-[13px] font-semibold text-slate-700 hover:bg-slate-50 transition">
-                  Read reviews <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
               <div className="mt-8 flex items-center gap-4 text-[12px] text-slate-500">
@@ -206,42 +200,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section-shell mt-12 sm:mt-16">
-        <div className="text-center">
-          <p className="eyebrow">Client love</p>
-          <h2 className="section-heading mt-1">What customers say</h2>
-          <p className="mx-auto mt-2 max-w-[48ch] text-[13px] text-slate-500">Real reviews from verified buyers</p>
-        </div>
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-          {testimonials.slice(0, 3).map((t) => (
-            <div key={t.id} className="flex flex-col rounded-[20px] border border-slate-200 bg-white p-6 shadow-card">
-              <div className="flex gap-1 text-amber-500">
-                {[...Array(t.rating || 5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />)}
-              </div>
-              <p className="mt-4 text-[13px] leading-6 text-slate-700">“{t.comment}”</p>
-              <div className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
-                <img src={t.avatar} alt={t.name} className="h-10 w-10 rounded-full object-cover border border-slate-100" />
-                <div><p className="text-[13px] font-semibold text-slate-900">{t.name}</p><p className="text-[11px] text-slate-500">{t.role}</p></div>
-              </div>
-            </div>
-          ))}
-          {testimonials.length === 0 && (
-            <>
-              {[1,2,3].map((i) => (
-                <div key={i} className="rounded-[20px] border border-slate-200 bg-white p-6">
-                  <div className="flex gap-1">{[...Array(5)].map((_,j)=><Star key={j} className="h-4 w-4 fill-amber-400 text-amber-400" />)}</div>
-                  <p className="mt-4 text-[13px] leading-6 text-slate-600">“Quality exceeded expectations. Fast delivery and beautiful packaging.”</p>
-                  <div className="mt-6 border-t pt-5 text-[13px] font-semibold">Verified buyer</div>
-                </div>
-              ))}
-            </>
-          )}
-        </div>
-        <div className="mt-6 text-center">
-          <Link to="/testimonials" className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-slate-900 hover:text-blue-600">All reviews <ArrowRight className="h-4 w-4" /></Link>
-        </div>
-      </section>
+
     </div>
   );
 };

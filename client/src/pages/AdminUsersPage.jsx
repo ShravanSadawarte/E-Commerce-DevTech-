@@ -31,24 +31,15 @@ const AdminUsersPage = () => {
     }
   };
 
-  const handleRoleChange = async (user, newRole) => {
-    try {
-      await api.put(`/admin/users/${user.id}/status`, { role: newRole });
-      loadUsers();
-    } catch (e) {
-      alert('Failed to update user role');
-    }
-  };
-
   return (
     <div className="space-y-6">
       <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 card-shadow space-y-6">
         <div className="pb-4 border-b border-slate-100">
           <h2 className="text-lg font-black uppercase tracking-tight text-slate-900">
-            User Accounts & Role Permissions ({users.length})
+            Customers ({users.length})
           </h2>
           <p className="text-xs text-slate-500">
-            Manage customer status, grant staff administration roles, and audit accounts.
+            View customer accounts, audit status and manage access.
           </p>
         </div>
 
@@ -59,7 +50,7 @@ const AdminUsersPage = () => {
                 <th className="py-3 px-2">User</th>
                 <th className="py-3 px-2">Email</th>
                 <th className="py-3 px-2">Phone</th>
-                <th className="py-3 px-2">Assigned Role</th>
+                <th className="py-3 px-2">Role</th>
                 <th className="py-3 px-2">Account State</th>
                 <th className="py-3 px-2">Joined Date</th>
                 <th className="py-3 px-2 text-right">Actions</th>
@@ -81,16 +72,9 @@ const AdminUsersPage = () => {
                   <td className="py-3 px-2 font-mono text-slate-600">{u.email}</td>
                   <td className="py-3 px-2 text-slate-500">{u.phone || '—'}</td>
                   <td className="py-3 px-2">
-                    <select
-                      value={u.role}
-                      onChange={(e) => handleRoleChange(u, e.target.value)}
-                      className="bg-slate-100 border border-slate-200 text-slate-900 text-[11px] font-bold rounded-lg px-2 py-1 cursor-pointer"
-                    >
-                      <option value="CUSTOMER">CUSTOMER</option>
-                      <option value="SUPPORT">SUPPORT</option>
-                      <option value="ADMIN">ADMIN</option>
-                      <option value="SUPER_ADMIN">SUPER_ADMIN</option>
-                    </select>
+                    <span className="inline-flex rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase text-slate-700 ring-1 ring-slate-200">
+                      {u.role}
+                    </span>
                   </td>
                   <td className="py-3 px-2">
                     <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
