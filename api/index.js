@@ -1,11 +1,12 @@
-const app = require('../src/app');
-const { sequelize } = require('../src/config/database');
+const app = require('../server/src/app');
+const { sequelize } = require('../server/src/config/database');
 
 let isDbInitialized = false;
 
 async function ensureDb() {
   if (!isDbInitialized) {
-    await sequelize.sync({ alter: false });
+    // Use alter:true so Vercel's ephemeral /tmp SQLite auto-migrates when models change
+    await sequelize.sync({ alter: true });
     isDbInitialized = true;
     console.log('[Vercel] Database synced');
   }

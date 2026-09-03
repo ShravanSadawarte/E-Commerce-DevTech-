@@ -29,8 +29,24 @@ const startServer = async () => {
   try {
     await testConnection();
 
-    // Sync database schema
-    await sequelize.sync({ alter: false });
+    // Sync database schema — alter:true auto-migrates SQLite when models change (dev convenience)
+    // In production with MySQL, use migrations; alter is safe for SQLite fallback.
+    const syncOptions = process.env.NODE_ENV === 'production' && process.env.DB_DIALECT === 'mysql'
+      ? { alter: false }
+      : { alter: true };
+    try {
+      await sequelize.sync(syncOptions);
+    } catch (syncErr) {
+      // Stale SQLite file (e.g. missing parentId column) — recreate
+      console.warn('[DB] Sync failed, attempting recovery:', syncErr.message);
+      if (process.env.DB_DIALECT !== 'mysql') {
+        await sequelize.sync({ force: true });
+        console.log('[DB] Database recreated via force sync');
+        // Re-seed would be needed externally — don't auto-seed here
+      } else {
+        throw syncErr;
+      }
+    }
     console.log('[DB] Sequelize models synchronized successfully.');
 
     server.listen(PORT, () => {

@@ -56,8 +56,9 @@ app.use('/api', apiLimiter);
 // API Routes
 app.use('/api', routes);
 
-// Serve React build in production (single-server deploy)
-if (process.env.NODE_ENV === 'production') {
+// Serve React build in production (single-server deploy: Render/Railway)
+// On Vercel, frontend is served from outputDirectory (client/dist) via CDN — skip here
+if (process.env.NODE_ENV === 'production' && !process.env.VERCEL) {
   const clientDist = path.join(__dirname, '../../client/dist');
   app.use(express.static(clientDist));
   // SPA fallback — serve index.html for non-API routes
