@@ -56,7 +56,18 @@ app.use('/api', apiLimiter);
 // API Routes
 app.use('/api', routes);
 
-// 404 Handler
+// Serve React build in production (single-server deploy)
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientDist));
+  // SPA fallback — serve index.html for non-API routes
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(clientDist, 'index.html'));
+  });
+}
+
+// 404 Handler (for API only — React fallback above handles frontend)
 app.use((req, res) => {
   res.status(404).json({
     success: false,

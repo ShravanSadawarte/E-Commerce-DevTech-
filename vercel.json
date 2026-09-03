@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "installCommand": "npm run install:all && npm rebuild sqlite3 --prefix server --unsafe-perm || true",
+  "buildCommand": "npm run build:client",
+  "functions": {
+    "server/api/index.js": {
+      "includeFiles": "client/dist/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/server/api/index.js" }
+  ]
+}
